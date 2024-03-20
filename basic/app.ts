@@ -37,6 +37,8 @@ const person = {
 // person.role = [0, "admin", "user"];
 
 let favoriteActivities: string[];
+// let favoriteActivities: any[];
+// any 타입은 컴파일러가 아무 것도 하지 못하게 함. 모든 타입이 가능.
 favoriteActivities = ["Sports"];
 
 console.log(person.name);
