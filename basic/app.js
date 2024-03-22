@@ -20,3 +20,10 @@ var combinedStringAges = combine("30", "26", "as-number");
 console.log(combinedStringAges);
 var combineNames = combine("Max", "Anna", "as-text");
 console.log(combineNames);
+var u1 = { name: "Max", age: 30 }; // this works!
+function greet(user) {
+    console.log("Hi, I am " + user.name);
+}
+function isOlder(user, checkAge) {
+    return checkAge > user.age;
+}

@@ -1,7 +1,10 @@
+type Combinable = number | string;
+type ConversionDiscriptor = "as-number" | "as-text";
+
 function combine(
-  input1: number | string,
-  input2: number | string,
-  resultType: "as-number" | "as-text"
+  input1: Combinable,
+  input2: Combinable,
+  resultType: ConversionDiscriptor
 ) {
   let result;
   if (
@@ -29,3 +32,16 @@ console.log(combinedStringAges);
 
 const combineNames = combine("Max", "Anna", "as-text");
 console.log(combineNames);
+
+//----------
+// 객체 타입 alias
+type User = { name: string; age: number };
+const u1: User = { name: "Max", age: 30 }; // this works!
+
+function greet(user: User) {
+  console.log("Hi, I am " + user.name);
+}
+
+function isOlder(user: User, checkAge: number) {
+  return checkAge > user.age;
+}
