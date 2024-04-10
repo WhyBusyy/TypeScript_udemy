@@ -17,3 +17,4 @@ const number2 = 2.8;
 const printResult = true;
 let resultPhrase = "Result is: ";
 add(number1, number2, printResult, resultPhrase);
+//# sourceMappingURL=basic.js.map

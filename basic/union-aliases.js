@@ -28,3 +28,4 @@ function greet(user) {
 function isOlder(user, checkAge) {
     return checkAge > user.age;
 }
+//# sourceMappingURL=union-aliases.js.map
