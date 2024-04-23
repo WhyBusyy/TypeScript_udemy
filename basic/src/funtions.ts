@@ -1,8 +1,8 @@
-function add(n1: number, n2: number) {
+function addNum(n1: number, n2: number) {
   return n1 + n2;
 }
 
-function printResult(num: number) {
+function printResultNum(num: number) {
   console.log("Result: " + num);
 }
 
@@ -11,12 +11,12 @@ function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
   cb(result);
 }
 
-printResult(add(5, 12));
+printResultNum(addNum(5, 12));
 
 // let someValue: undefined;
 let combineValues: (a: number, b: number) => number;
 
-combineValues = add;
+combineValues = addNum;
 // combineValues = printResult;
 // combineValues = 5;
 
