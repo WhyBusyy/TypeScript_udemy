@@ -11,7 +11,7 @@ const hobbies = ["Soccer", "Football"];
 const activeHobbies = ["Hiking"];
 activeHobbies.push(...hobbies);
 const person1 = {
-    name: "Max",
+    firstName: "Max",
     age: 31,
 };
 const copiedPerson = Object.assign({}, person1);
@@ -21,4 +21,6 @@ const arrowAdd = (...numbers) => {
 };
 const addedNumbers = arrowAdd(5, 3, 4, 3.1);
 console.log(addedNumbers);
+const [hobby1, hobby2, ...restHobbies] = hobbies;
+const { firstName: userName, age } = person1;
 //# sourceMappingURL=app.js.map

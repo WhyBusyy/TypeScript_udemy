@@ -17,7 +17,7 @@ const activeHobbies = ["Hiking"];
 activeHobbies.push(...hobbies);
 
 const person1 = {
-  name: "Max",
+  firstName: "Max",
   age: 31,
 };
 
@@ -30,3 +30,6 @@ const arrowAdd = (...numbers: number[]) => {
 
 const addedNumbers = arrowAdd(5, 3, 4, 3.1);
 console.log(addedNumbers);
+
+const [hobby1, hobby2, ...restHobbies] = hobbies;
+const { firstName: userName, age } = person1;
