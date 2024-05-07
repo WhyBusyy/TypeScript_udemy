@@ -10,3 +10,15 @@ if (button) {
 }
 
 printOutput(arrowAdd(5));
+
+const hobbies = ["Soccer", "Football"];
+const activeHobbies = ["Hiking"];
+
+activeHobbies.push(...hobbies);
+
+const person1 = {
+  name: "Max",
+  age: 31,
+};
+
+const copiedPerson = { ...person1 };
