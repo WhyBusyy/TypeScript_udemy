@@ -1,26 +1,33 @@
 "use strict";
-// const arrowAdd = (a: number, b: number = 1) => a + b;
-// const printOutput: (a: number | string) => void = (output) =>
-//   console.log(output);
-// const button = document.querySelector("button")!;
-// if (button) {
-//   button.addEventListener("click", (event) => console.log(event));
-// }
-// printOutput(arrowAdd(5));
-const hobbies = ["Soccer", "Football"];
-const activeHobbies = ["Hiking"];
-activeHobbies.push(...hobbies);
-const person1 = {
-    firstName: "Max",
-    age: 31,
-};
-const copiedPerson = Object.assign({}, person1);
-//----
-const arrowAdd = (...numbers) => {
-    return numbers.reduce((a, b) => a + b, 0);
-};
-const addedNumbers = arrowAdd(5, 3, 4, 3.1);
-console.log(addedNumbers);
-const [hobby1, hobby2, ...restHobbies] = hobbies;
-const { firstName: userName, age } = person1;
+class Department {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+        //   private readonly id: string;
+        //   private name: string;
+        this.employees = [];
+        // this.id = id;
+        // this.name = n;
+    }
+    describe() {
+        console.log(`Department (${this.id}): ${this.name}`);
+    }
+    addEmployee(employee) {
+        // this.id = "d2";
+        this.employees.push(employee);
+    }
+    printEmployeeInformation() {
+        console.log(this.employees.length);
+        console.log(this.employees);
+    }
+}
+const accounting = new Department("d1", "Accounting");
+accounting.addEmployee("Max");
+accounting.addEmployee("Manu");
+// accounting.employees[2] = "Anna";
+accounting.describe();
+accounting.name = "NEW NAME";
+accounting.printEmployeeInformation();
+// const accountingCopy = { name: "DUMMY", describe: accounting.describe };
+// accountingCopy.describe();
 //# sourceMappingURL=app.js.map
