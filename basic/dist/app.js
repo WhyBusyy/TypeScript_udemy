@@ -12,9 +12,6 @@ class Department {
     static createEmployee(name) {
         return { name: name };
     }
-    describe() {
-        console.log(`Department (${this.id}): ${this.name}`);
-    }
     addEmployee(employee) {
         // this.id = "d2";
         this.employees.push(employee);
@@ -29,6 +26,9 @@ class ITDepartment extends Department {
     constructor(id, admins) {
         super(id, "IT");
         this.admins = admins;
+    }
+    describe() {
+        console.log(`IT Department - ID: ${this.id}`);
     }
 }
 class AccountingDepartment extends Department {
@@ -48,6 +48,9 @@ class AccountingDepartment extends Department {
         super(id, "Accounting");
         this.reports = reports;
         this.lastReport = reports[0];
+    }
+    describe() {
+        console.log(`Accounting Department - ID: ${this.id}`);
     }
     addEmployee(name) {
         if (name === "Max") {
@@ -79,8 +82,9 @@ accounting.addReport("Somethings went wrong...");
 console.log(accounting.mostRecentReport);
 accounting.addEmployee("Max");
 accounting.addEmployee("Manu");
-accounting.printReport();
-accounting.printEmployeeInformation();
+// accounting.printReport();
+// accounting.printEmployeeInformation();
+accounting.describe();
 // const accountingCopy = { name: "DUMMY", describe: accounting.describe };
 // accountingCopy.describe();
 //# sourceMappingURL=app.js.map
