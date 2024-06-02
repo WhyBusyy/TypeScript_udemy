@@ -1,98 +1,50 @@
 "use strict";
-class Department {
-    constructor(id, name) {
-        this.id = id;
-        this.name = name;
-        //   private readonly id: string;
-        //   private name: string;
-        this.employees = [];
-        // this.id = id;
-        // this.name = n;
+// interface Admin = {
+//   name: string;
+//   privileges: string[];
+// };
+const e1 = {
+    name: "Max",
+    privileges: ["create-server"],
+    startDate: new Date(),
+};
+function add(a, b) {
+    if (typeof a === "string" || typeof b === "string") {
+        return a.toString() + b.toString();
     }
-    static createEmployee(name) {
-        return { name: name };
+    return a + b;
+}
+function printEmployeeInformation(emp) {
+    console.log("Name: " + emp.name);
+    if ("privileges" in emp) {
+        console.log("Privileges: " + emp.privileges);
     }
-    addEmployee(employee) {
-        // this.id = "d2";
-        this.employees.push(employee);
-    }
-    printEmployeeInformation() {
-        console.log(this.employees.length);
-        console.log(this.employees);
+    if ("startDate" in emp) {
+        console.log("Start Date: " + emp.startDate);
     }
 }
-Department.fiscalYear = 2020;
-class ITDepartment extends Department {
-    constructor(id, admins) {
-        super(id, "IT");
-        this.admins = admins;
-    }
-    describe() {
-        console.log(`IT Department - ID: ${this.id}`);
+printEmployeeInformation({ name: "Manu", startDate: new Date() });
+class Car {
+    drive() {
+        console.log("Driving...");
     }
 }
-class AccountingDepartment extends Department {
-    get mostRecentReport() {
-        if (this.lastReport) {
-            return this.lastReport;
-        }
-        throw new Error("No report found.");
+class Truck {
+    drive() {
+        console.log("Driving a truck...");
     }
-    set mostRecentReport(value) {
-        if (!value) {
-            throw new Error("Please pass in a valid value!");
-        }
-        this.addReport(value);
-    }
-    constructor(id, reports) {
-        super(id, "Accounting");
-        this.reports = reports;
-        this.lastReport = reports[0];
-    }
-    static getInstance() {
-        if (AccountingDepartment.instance) {
-            return this.instance;
-        }
-        this.instance = new AccountingDepartment("d2", []);
-        return this.instance;
-    }
-    describe() {
-        console.log(`Accounting Department - ID: ${this.id}`);
-    }
-    addEmployee(name) {
-        if (name === "Max") {
-            return;
-        }
-        this.employees.push(name);
-    }
-    addReport(text) {
-        this.reports.push(text);
-        this.lastReport = text;
-    }
-    printReport() {
-        console.log(this.reports);
+    loadCargo(amount) {
+        console.log("Loading cargo..." + amount);
     }
 }
-const employee1 = Department.createEmployee("Max");
-console.log(employee1, Department.fiscalYear);
-const it = new ITDepartment("d1", ["Max"]);
-it.addEmployee("Max");
-it.addEmployee("Manu");
-// it.employees[2] = "Anna";
-it.describe();
-it.name = "NEW NAME";
-it.printEmployeeInformation();
-const accounting = AccountingDepartment.getInstance();
-const accounting2 = AccountingDepartment.getInstance();
-console.log(accounting, accounting2);
-accounting.mostRecentReport = "Year and Report";
-accounting.addReport("Somethings went wrong...");
-console.log(accounting.mostRecentReport);
-accounting.addEmployee("Max");
-accounting.addEmployee("Manu");
-// accounting.printReport();
-// accounting.printEmployeeInformation();
-accounting.describe();
-// const accountingCopy = { name: "DUMMY", describe: accounting.describe };
-// accountingCopy.describe();
+const v1 = new Car();
+const v2 = new Truck();
+function useVehicle(vehicle) {
+    vehicle.drive();
+    if (vehicle instanceof Truck) {
+        vehicle.loadCargo(1000);
+    }
+}
+useVehicle(v1);
+useVehicle(v2);
 //# sourceMappingURL=app.js.map

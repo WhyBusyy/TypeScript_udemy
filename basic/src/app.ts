@@ -1,123 +1,86 @@
-abstract class Department {
-  static fiscalYear = 2020;
-  //   private readonly id: string;
-  //   private name: string;
-  protected employees: string[] = [];
+// interface Admin = {
+//   name: string;
+//   privileges: string[];
+// };
 
-  constructor(protected readonly id: string, public name: string) {
-    // this.id = id;
-    // this.name = n;
+// interface Employee = {
+//   name: string;
+//   startDate: Date;
+// };
+
+// interface ElevatedEmployee extends Admin, Employee {};
+type Admin = {
+  name: string;
+  privileges: string[];
+};
+
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+
+type ElevatedEmployee = Admin & Employee;
+
+const e1: ElevatedEmployee = {
+  name: "Max",
+  privileges: ["create-server"],
+  startDate: new Date(),
+};
+
+type Combinable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combinable & Numeric;
+
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
   }
 
-  static createEmployee(name: string) {
-    return { name: name };
+  return a + b;
+}
+
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInformation(emp: UnknownEmployee) {
+  console.log("Name: " + emp.name);
+  if ("privileges" in emp) {
+    console.log("Privileges: " + emp.privileges);
   }
-
-  abstract describe(this: Department): void;
-
-  addEmployee(employee: string) {
-    // this.id = "d2";
-    this.employees.push(employee);
-  }
-
-  printEmployeeInformation() {
-    console.log(this.employees.length);
-    console.log(this.employees);
+  if ("startDate" in emp) {
+    console.log("Start Date: " + emp.startDate);
   }
 }
 
-class ITDepartment extends Department {
-  admins: string[];
-  constructor(id: string, admins: string[]) {
-    super(id, "IT");
-    this.admins = admins;
-  }
+printEmployeeInformation({ name: "Manu", startDate: new Date() });
 
-  describe() {
-    console.log(`IT Department - ID: ${this.id}`);
+class Car {
+  drive() {
+    console.log("Driving...");
   }
 }
 
-class AccountingDepartment extends Department {
-  private lastReport: string;
-  private static instance: AccountingDepartment;
-
-  get mostRecentReport() {
-    if (this.lastReport) {
-      return this.lastReport;
-    }
-    throw new Error("No report found.");
+class Truck {
+  drive() {
+    console.log("Driving a truck...");
   }
 
-  set mostRecentReport(value: string) {
-    if (!value) {
-      throw new Error("Please pass in a valid value!");
-    }
-    this.addReport(value);
-  }
-
-  private constructor(id: string, private reports: string[]) {
-    super(id, "Accounting");
-    this.lastReport = reports[0];
-  }
-
-  static getInstance() {
-    if (AccountingDepartment.instance) {
-      return this.instance;
-    }
-    this.instance = new AccountingDepartment("d2", []);
-    return this.instance;
-  }
-
-  describe() {
-    console.log(`Accounting Department - ID: ${this.id}`);
-  }
-
-  addEmployee(name: string) {
-    if (name === "Max") {
-      return;
-    }
-    this.employees.push(name);
-  }
-
-  addReport(text: string) {
-    this.reports.push(text);
-    this.lastReport = text;
-  }
-
-  printReport() {
-    console.log(this.reports);
+  loadCargo(amount: number) {
+    console.log("Loading cargo..." + amount);
   }
 }
 
-const employee1 = Department.createEmployee("Max");
-console.log(employee1, Department.fiscalYear);
+type Vehicle = Car | Truck;
 
-const it = new ITDepartment("d1", ["Max"]);
+const v1 = new Car();
+const v2 = new Truck();
 
-it.addEmployee("Max");
-it.addEmployee("Manu");
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(1000);
+  }
+}
 
-// it.employees[2] = "Anna";
-
-it.describe();
-it.name = "NEW NAME";
-it.printEmployeeInformation();
-
-const accounting = AccountingDepartment.getInstance();
-const accounting2 = AccountingDepartment.getInstance();
-console.log(accounting, accounting2);
-
-accounting.mostRecentReport = "Year and Report";
-accounting.addReport("Somethings went wrong...");
-console.log(accounting.mostRecentReport);
-accounting.addEmployee("Max");
-accounting.addEmployee("Manu");
-
-// accounting.printReport();
-// accounting.printEmployeeInformation();
-accounting.describe();
-
-// const accountingCopy = { name: "DUMMY", describe: accounting.describe };
-
-// accountingCopy.describe();
+useVehicle(v1);
+useVehicle(v2);
