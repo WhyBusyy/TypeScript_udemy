@@ -16,14 +16,18 @@ function Logger(logString) {
     };
 }
 function WithTemplate(template, hookId) {
-    return function (constructor) {
-        console.log("TEMPLATE template");
-        const hookEl = document.getElementById(hookId);
-        const p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector("h1").textContent = p.name;
-        }
+    return function (originalConstructor) {
+        return class extends originalConstructor {
+            constructor(..._) {
+                super();
+                console.log("Rendering template");
+                const hookEl = document.getElementById(hookId);
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector("h1").textContent = this.name;
+                }
+            }
+        };
     };
 }
 // @Logger("LOGGING - PERSON")
@@ -89,4 +93,6 @@ __decorate([
     Log3,
     __param(0, Log4)
 ], Product.prototype, "getPriceWithTax", null);
+// ----
+const p1 = new Product("Book", 19);
 //# sourceMappingURL=app.js.map
